@@ -16,17 +16,12 @@ all_challenges = {
     "september": "Walk for at least 1000 steps every day.",
     "october": "Eat no meat for the entire month.",
     "november": "Walk for at least 1000 steps every day.",
-    "december": "Walk for at least 1000 steps every day.",
+    "december": None,
 }
 
 
 def index(request):
-    month_list = ""
-    list_header = "<h1>Monthly Challenges</h1>"
-    for month in all_challenges:
-        month_path = reverse("month-challenge", args=[month])
-        month_list += f"<li><a href='{month_path}'>{month.title()}</a></li>"
-    return HttpResponse(list_header + f"<ul>{month_list}</ul>")
+    return render(request, "challenges/index.html", {"months": all_challenges.keys()})
 
 
 def monthly_challenge_by_number(request, month):
@@ -41,7 +36,10 @@ def monthly_challenge_by_number(request, month):
 def monthly_challenge(request, month):
     try:
         challenge_text = all_challenges[month]
-        response_data = f"<h1>{challenge_text}</h1>"
-        return HttpResponse(response_data)
+        return render(
+            request,
+            "challenges/challenge.html",
+            {"month": month, "text": challenge_text},
+        )
     except:
         return HttpResponseNotFound("<h1>This is not a valid month.</h1>")
