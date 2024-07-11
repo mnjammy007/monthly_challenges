@@ -1,0 +1,11 @@
+<header>
+    <nav>
+        <a href="{% url "index" %}">All Challenges</a>
+    </nav>
+    {% comment %} include will have access to this variable month for challenge.html but not for index.html {% endcomment %}
+    {% comment %} {{ month|title }} Challenge {% endcomment %}
+    {% comment %} we can also use with keyword for include like 
+    include "challenges/includes/header.html" with current_page="my_page"
+     {% endcomment %}
+</header>
+{{current_page}}

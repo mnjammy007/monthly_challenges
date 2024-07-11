@@ -1,17 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>All Challenges</title>
-    </head>
-    <body>
-        <h1>All Challenge</h1>
-        {% comment %} url workks same as reverse in html files {% endcomment %}
-        <ul>
-            {% for month in months %}
-            <li><a href="{% url "month-challenge" month=month %}">{{month|title}}</a></li>
-            {% endfor %}
-        </ul>
-    </body>
-</html>
+{% extends "base.html" %}
+{% load static %}
+{% block css_files %}
+ <link rel="stylesheet" href="{% static "challenges/challenges.css" %}">
+{% endblock %}
+    {% block page_title %} All Challenges{% endblock %}
+    {% block content %}
+    {% include "challenges/includes/header.html" %}
+    {% comment %} url works same as reverse in html files {% endcomment %}
+    <ul>
+        {% for month in months %}
+        <li><a href="{% url "month-challenge" month=month %}">{{month|title}}</a></li>
+        {% endfor %}
+    </ul>
+    {% endblock %}  
