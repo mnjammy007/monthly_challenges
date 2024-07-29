@@ -1,15 +1,20 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% load static %}
 {% block css_files %}
- <link rel="stylesheet" href="{% static "challenges/challenges.css" %}">
+  <link rel="stylesheet" href="{% static 'challenges/challenges.css' %}" />
+  <link rel="stylesheet" href="{% static 'challenges/includes/header.css' %}" />
 {% endblock %}
-    {% block page_title %} All Challenges{% endblock %}
-    {% block content %}
-    {% include "challenges/includes/header.html" %}
-    {% comment %} url works same as reverse in html files {% endcomment %}
-    <ul>
-        {% for month in months %}
-        <li><a href="{% url "month-challenge" month=month %}">{{month|title}}</a></li>
-        {% endfor %}
-    </ul>
-    {% endblock %}  
+{% block page_title %}
+  All Challenges
+{% endblock %}
+{% block content %}
+  {% include 'challenges/includes/header.html' with active_page='index' %}
+  {% comment %}url works same as reverse in html files{% endcomment %}
+  <ul>
+    {% for month in months %}
+      <li>
+        <a href="{% url "month-challenge" month=month %}">{{ month|title }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
